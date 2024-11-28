@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44B782C23438C609DCF526BF /* Pods_HappyPatient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B835E3C8C9A91457A7A6FC1 /* Pods_HappyPatient.framework */; };
 		B861A9022CF8B1C1005FBABC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9012CF8B1C1005FBABC /* AppDelegate.swift */; };
 		B861A9042CF8B1C1005FBABC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */; };
 		B861A9062CF8B1C1005FBABC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9052CF8B1C1005FBABC /* ViewController.swift */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B835E3C8C9A91457A7A6FC1 /* Pods_HappyPatient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyPatient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9252BB57620939076A833D09 /* Pods-HappyPatient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyPatient.release.xcconfig"; path = "Target Support Files/Pods-HappyPatient/Pods-HappyPatient.release.xcconfig"; sourceTree = "<group>"; };
 		B861A8FE2CF8B1C1005FBABC /* HappyPatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyPatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B861A9012CF8B1C1005FBABC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +29,7 @@
 		B861A90D2CF8B1C2005FBABC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B861A9102CF8B1C2005FBABC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B861A9122CF8B1C2005FBABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E889244DCED25F00D8BD00EB /* Pods-HappyPatient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyPatient.debug.xcconfig"; path = "Target Support Files/Pods-HappyPatient/Pods-HappyPatient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44B782C23438C609DCF526BF /* Pods_HappyPatient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9DCE4285A259B6E5ACAC8B07 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E889244DCED25F00D8BD00EB /* Pods-HappyPatient.debug.xcconfig */,
+				9252BB57620939076A833D09 /* Pods-HappyPatient.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B861A8F52CF8B1C1005FBABC = {
 			isa = PBXGroup;
 			children = (
 				B861A9002CF8B1C1005FBABC /* HappyPatient */,
 				B861A8FF2CF8B1C1005FBABC /* Products */,
+				9DCE4285A259B6E5ACAC8B07 /* Pods */,
+				FA4373C7B16A6AF0FE4C0ECB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,9 +74,11 @@
 		B861A9002CF8B1C1005FBABC /* HappyPatient */ = {
 			isa = PBXGroup;
 			children = (
+				B861A91A2CF8B9F7005FBABC /* ViewModel */,
+				B861A9192CF8B9EF005FBABC /* View */,
+				B861A9182CF8B9E9005FBABC /* Model */,
 				B861A9012CF8B1C1005FBABC /* AppDelegate.swift */,
 				B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */,
-				B861A9052CF8B1C1005FBABC /* ViewController.swift */,
 				B861A9072CF8B1C1005FBABC /* Main.storyboard */,
 				B861A90D2CF8B1C2005FBABC /* Assets.xcassets */,
 				B861A90F2CF8B1C2005FBABC /* LaunchScreen.storyboard */,
@@ -70,6 +88,36 @@
 			path = HappyPatient;
 			sourceTree = "<group>";
 		};
+		B861A9182CF8B9E9005FBABC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B861A9192CF8B9EF005FBABC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B861A91A2CF8B9F7005FBABC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B861A9052CF8B1C1005FBABC /* ViewController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FA4373C7B16A6AF0FE4C0ECB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4B835E3C8C9A91457A7A6FC1 /* Pods_HappyPatient.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +125,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B861A9152CF8B1C2005FBABC /* Build configuration list for PBXNativeTarget "HappyPatient" */;
 			buildPhases = (
+				ECCAB2DD99E49DE48BA2A4EC /* [CP] Check Pods Manifest.lock */,
 				B861A8FA2CF8B1C1005FBABC /* Sources */,
 				B861A8FB2CF8B1C1005FBABC /* Frameworks */,
 				B861A8FC2CF8B1C1005FBABC /* Resources */,
+				F4C95D890C3BF6E770682F52 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -135,6 +185,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ECCAB2DD99E49DE48BA2A4EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HappyPatient-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4C95D890C3BF6E770682F52 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyPatient/Pods-HappyPatient-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HappyPatient/Pods-HappyPatient-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HappyPatient/Pods-HappyPatient-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B861A8FA2CF8B1C1005FBABC /* Sources */ = {
@@ -207,7 +299,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -270,7 +362,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -291,11 +383,13 @@
 		};
 		B861A9162CF8B1C2005FBABC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E889244DCED25F00D8BD00EB /* Pods-HappyPatient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FH6ZF6KTY7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HappyPatient/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -303,6 +397,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -318,11 +413,13 @@
 		};
 		B861A9172CF8B1C2005FBABC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9252BB57620939076A833D09 /* Pods-HappyPatient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FH6ZF6KTY7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HappyPatient/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -330,6 +427,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

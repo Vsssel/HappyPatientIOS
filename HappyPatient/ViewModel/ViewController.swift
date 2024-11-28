@@ -11,7 +11,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let text = UITextView()
+        text.text = "Hello World"
+        print(text.text)
+        view.addSubview(text)
     }
 
 
