@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		44B782C23438C609DCF526BF /* Pods_HappyPatient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B835E3C8C9A91457A7A6FC1 /* Pods_HappyPatient.framework */; };
+		B82F5FBE2CF9CAD50020EEC6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FBD2CF9CAD50020EEC6 /* LoginViewController.swift */; };
+		B82F5FC02CF9CB310020EEC6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FBF2CF9CB310020EEC6 /* LoginViewModel.swift */; };
+		B82F5FC32CF9CB730020EEC6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FC22CF9CB730020EEC6 /* NetworkManager.swift */; };
+		B82F5FC52CF9CB930020EEC6 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FC42CF9CB930020EEC6 /* LoginModel.swift */; };
+		B82F5FC72CF9CBEF0020EEC6 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FC62CF9CBEF0020EEC6 /* SignupViewController.swift */; };
+		B82F5FC92CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */; };
+		B82F5FCB2CF9CD0F0020EEC6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FCA2CF9CD0F0020EEC6 /* SignUpViewModel.swift */; };
+		B82F5FCD2CF9D60D0020EEC6 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */; };
 		B861A9022CF8B1C1005FBABC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9012CF8B1C1005FBABC /* AppDelegate.swift */; };
 		B861A9042CF8B1C1005FBABC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */; };
 		B861A9062CF8B1C1005FBABC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9052CF8B1C1005FBABC /* ViewController.swift */; };
@@ -20,6 +28,14 @@
 /* Begin PBXFileReference section */
 		4B835E3C8C9A91457A7A6FC1 /* Pods_HappyPatient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyPatient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9252BB57620939076A833D09 /* Pods-HappyPatient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyPatient.release.xcconfig"; path = "Target Support Files/Pods-HappyPatient/Pods-HappyPatient.release.xcconfig"; sourceTree = "<group>"; };
+		B82F5FBD2CF9CAD50020EEC6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B82F5FBF2CF9CB310020EEC6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		B82F5FC22CF9CB730020EEC6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B82F5FC42CF9CB930020EEC6 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		B82F5FC62CF9CBEF0020EEC6 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationViewController.swift; sourceTree = "<group>"; };
+		B82F5FCA2CF9CD0F0020EEC6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		B861A8FE2CF8B1C1005FBABC /* HappyPatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyPatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B861A9012CF8B1C1005FBABC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +69,34 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B82F5FBB2CF9CA900020EEC6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B861A9052CF8B1C1005FBABC /* ViewController.swift */,
+				B82F5FBD2CF9CAD50020EEC6 /* LoginViewController.swift */,
+				B82F5FC62CF9CBEF0020EEC6 /* SignupViewController.swift */,
+				B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B82F5FBC2CF9CAA40020EEC6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B82F5FC42CF9CB930020EEC6 /* LoginModel.swift */,
+				B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B82F5FC12CF9CB650020EEC6 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B82F5FC22CF9CB730020EEC6 /* NetworkManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		B861A8F52CF8B1C1005FBABC = {
 			isa = PBXGroup;
 			children = (
@@ -74,9 +118,10 @@
 		B861A9002CF8B1C1005FBABC /* HappyPatient */ = {
 			isa = PBXGroup;
 			children = (
+				B82F5FC12CF9CB650020EEC6 /* Service */,
+				B82F5FBC2CF9CAA40020EEC6 /* Model */,
+				B82F5FBB2CF9CA900020EEC6 /* View */,
 				B861A91A2CF8B9F7005FBABC /* ViewModel */,
-				B861A9192CF8B9EF005FBABC /* View */,
-				B861A9182CF8B9E9005FBABC /* Model */,
 				B861A9012CF8B1C1005FBABC /* AppDelegate.swift */,
 				B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */,
 				B861A9072CF8B1C1005FBABC /* Main.storyboard */,
@@ -88,24 +133,11 @@
 			path = HappyPatient;
 			sourceTree = "<group>";
 		};
-		B861A9182CF8B9E9005FBABC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		B861A9192CF8B9EF005FBABC /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		B861A91A2CF8B9F7005FBABC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				B861A9052CF8B1C1005FBABC /* ViewController.swift */,
+				B82F5FBF2CF9CB310020EEC6 /* LoginViewModel.swift */,
+				B82F5FCA2CF9CD0F0020EEC6 /* SignUpViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -233,9 +265,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B82F5FC72CF9CBEF0020EEC6 /* SignupViewController.swift in Sources */,
+				B82F5FBE2CF9CAD50020EEC6 /* LoginViewController.swift in Sources */,
 				B861A90C2CF8B1C1005FBABC /* HappyPatient.xcdatamodeld in Sources */,
+				B82F5FCD2CF9D60D0020EEC6 /* SignUpModel.swift in Sources */,
+				B82F5FC02CF9CB310020EEC6 /* LoginViewModel.swift in Sources */,
+				B82F5FC32CF9CB730020EEC6 /* NetworkManager.swift in Sources */,
 				B861A9062CF8B1C1005FBABC /* ViewController.swift in Sources */,
+				B82F5FC52CF9CB930020EEC6 /* LoginModel.swift in Sources */,
 				B861A9022CF8B1C1005FBABC /* AppDelegate.swift in Sources */,
+				B82F5FC92CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift in Sources */,
+				B82F5FCB2CF9CD0F0020EEC6 /* SignUpViewModel.swift in Sources */,
 				B861A9042CF8B1C1005FBABC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
