@@ -11,7 +11,7 @@ import Combine
 
 class NetworkManager {
     static let shared = NetworkManager()
-    private let baseURL = "http://64.225.71.203:3000"
+    private let baseURL = "http://localhost:2222"
     
     private init() {}
     
@@ -25,10 +25,13 @@ class NetworkManager {
             AF.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
                 .validate()
                 .responseDecodable(of: T.self) { response in
+                    print(response)
                     switch response.result {
                     case .success(let result):
                         promise(.success(result))
+                        print(result)
                     case .failure(let error):
+                        print(error)
                         promise(.failure(error))
                     }
                 }

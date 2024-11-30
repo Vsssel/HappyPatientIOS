@@ -7,14 +7,14 @@
 
 import Foundation
 import Combine
+import Alamofire
 
 class LoginViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var user: User?
 
-    private var cancellables: Set<AnyCancellable> = [] // Correct declaration
-    private let baseURL = "http://64.225.71.203:3000"
+    private var cancellables: Set<AnyCancellable> = []
 
     func login(username: String, password: String) {
         isLoading = true
@@ -24,25 +24,35 @@ class LoginViewModel: ObservableObject {
             "login": username,
             "password": password
         ]
+        
+        // Ensure the base URL is included
+        let baseURL = "http://localhost:2222"  // Replace with the actual base URL
+        let url = "\(baseURL)/auth"  // Complete URL for the request
 
-        NetworkManager.shared.request("/auth/signin", method: .post, parameters: parameters, responseType: AuthResponse.self)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil)
+            .validate() // Optional: Validate response status code
+            .responseDecodable(of: User.self) { [weak self] response in
                 self?.isLoading = false
-                switch completion {
+                
+                switch response.result {
+                case .success(let user):
+                    // Extract token from headers
+                    if let token = response.response?.allHeaderFields["Authorization"] as? String {
+                        let tokenWithoutBearer = token.replacingOccurrences(of: "Bearer ", with: "")
+                        UserDefaults.standard.set(tokenWithoutBearer, forKey: "userToken")
+                    }
+                    
+                    if user.id != 0 {
+                        self?.user = user
+                    } else {
+                        self?.errorMessage = "Error occurred"
+                    }
+                    
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
-                case .finished:
-                    break
-                }
-            } receiveValue: { [weak self] authResponse in
-                if authResponse.success, let user = authResponse.data {
-                    self?.user = user
-                } else {
-                    self?.errorMessage = authResponse.message
                 }
             }
-            .store(in: &cancellables) // Correctly stores the subscription
     }
-}
 
+
+}
