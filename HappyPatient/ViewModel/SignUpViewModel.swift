@@ -5,19 +5,18 @@
 //  Created by Assel Artykbay on 29.11.2024.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 class SignUpViewModel: ObservableObject {
     
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
-    @Published var emailSent: Bool? = false
+    @Published var emailSent: Bool = false
+    @Published var signedUp: Bool = false
     
     public var cancellables: Set<AnyCancellable> = []
     
-    private let baseURL = "http://64.225.71.203:3000"
-
     func emailVerification(email: String, iin: String) {
         isLoading = true
         errorMessage = nil
@@ -27,7 +26,7 @@ class SignUpViewModel: ObservableObject {
             "iin": iin
         ]
 
-        NetworkManager.shared.request("/patient/auth", method: .post, parameters: parameters, responseType: AuthResponse.self)
+        NetworkManager.shared.request("/patient/auth", method: .post, parameters: parameters, responseType: EmailConfirmationResponse.self)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 self?.isLoading = false
@@ -38,12 +37,56 @@ class SignUpViewModel: ObservableObject {
                     break
                 }
             } receiveValue: { [weak self] authResponse in
-                if authResponse.success {
+                if authResponse.detail == "Verification Code is sent to your Email" {
                     self?.emailSent = true
                 } else {
-                    self?.errorMessage = authResponse.message
+                    self?.errorMessage = "Error occurred"
                 }
             }
             .store(in: &cancellables)
     }
+    
+    
+    func signUp(params: SignUpRequest) {
+        isLoading = true
+        errorMessage = nil
+
+        // Prepare parameters
+        let parameters: [String: Any] = [
+            "name": params.name,
+            "surname": params.surname,
+            "email": params.email,
+            "iin": params.iin,
+            "gender": params.gender,
+            "birthDate": params.birthDate,
+            "emailVerificationCode": params.emailVerificationCode,
+            "password": params.password
+        ]
+
+        // Network request
+        NetworkManager.shared.request(
+            "/patient/auth/sign-up",
+            method: .post,
+            parameters: parameters,
+            responseType: SignUpResponse.self
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] completion in
+            self?.isLoading = false
+            switch completion {
+            case .failure(let error):
+                self?.errorMessage = error.localizedDescription
+            case .finished:
+                break
+            }
+        } receiveValue: { [weak self] response in
+            if response.id != 0 {
+                self?.signedUp = true
+            } else {
+                self?.errorMessage = "An error occurred during sign-up."
+            }
+        }
+        .store(in: &cancellables)
+    }
+
 }

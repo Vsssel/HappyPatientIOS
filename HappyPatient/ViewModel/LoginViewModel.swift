@@ -13,8 +13,7 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var user: User?
 
-    private var cancellables: Set<AnyCancellable> = [] // Correct declaration
-    private let baseURL = "http://64.225.71.203:3000"
+    private var cancellables: Set<AnyCancellable> = []
 
     func login(username: String, password: String) {
         isLoading = true
@@ -24,8 +23,8 @@ class LoginViewModel: ObservableObject {
             "login": username,
             "password": password
         ]
-
-        NetworkManager.shared.request("/auth/signin", method: .post, parameters: parameters, responseType: AuthResponse.self)
+        
+        NetworkManager.shared.request("/patient/auth", method: .post, parameters: parameters, responseType: User.self)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 self?.isLoading = false
@@ -36,10 +35,10 @@ class LoginViewModel: ObservableObject {
                     break
                 }
             } receiveValue: { [weak self] authResponse in
-                if authResponse.success, let user = authResponse.data {
-                    self?.user = user
+                if authResponse.id != 0 {
+                    self?.user = authResponse
                 } else {
-                    self?.errorMessage = authResponse.message
+                    self?.errorMessage = "Error occured"
                 }
             }
             .store(in: &cancellables) // Correctly stores the subscription

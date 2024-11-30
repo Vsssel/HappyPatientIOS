@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import Combine
 
 class SignUpViewController: UIViewController {
     
@@ -13,15 +14,21 @@ class SignUpViewController: UIViewController {
     private let alreadyHaveAccountLabel = UILabel()
     private let loginButton = UIButton(type: .system)
     private let mainStack = UIStackView()
+    private let contentView = UIView()
     
     private let viewModel = SignUpViewModel()
+    private var cancellables = Set<AnyCancellable>()
     
+    public var user: TempUserInfo?
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupBindings()
     }
     
+    // MARK: - UI Setup
     private func setupUI() {
         view.backgroundColor = .white
         
@@ -29,15 +36,10 @@ class SignUpViewController: UIViewController {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textAlignment = .center
         
-        [nameTextField, surnameTextField, emailTextField, iinTextField].forEach {
-            $0.borderStyle = .roundedRect
-            $0.font = UIFont.systemFont(ofSize: 16)
-        }
-        
-        nameTextField.placeholder = "Name"
-        surnameTextField.placeholder = "Surname"
-        emailTextField.placeholder = "Email"
-        iinTextField.placeholder = "IIN"
+        nameTextField.setupPlaceholder("Name")
+        surnameTextField.setupPlaceholder("Surname")
+        emailTextField.setupPlaceholder("Email", keyboardType: .emailAddress)
+        iinTextField.setupPlaceholder("IIN", keyboardType: .numberPad)
         
         nextButton.setTitle("Next", for: .normal)
         nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
@@ -56,9 +58,6 @@ class SignUpViewController: UIViewController {
         mainStack.axis = .vertical
         mainStack.spacing = 16
         mainStack.alignment = .fill
-        mainStack.distribution = .fill
-        view.addSubview(mainStack)
-        
         mainStack.addArrangedSubview(titleLabel)
         mainStack.addArrangedSubview(nameTextField)
         mainStack.addArrangedSubview(surnameTextField)
@@ -71,52 +70,76 @@ class SignUpViewController: UIViewController {
         bottomStack.alignment = .center
         mainStack.addArrangedSubview(bottomStack)
         
-        mainStack.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(32)
-            make.left.right.equalToSuperview().inset(16)
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 10
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOpacity = 0.3
+        contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        contentView.layer.shadowRadius = 6
+        
+        contentView.addSubview(mainStack)
+        view.addSubview(contentView)
+        
+        contentView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.left.right.equalToSuperview().inset(20)
         }
         
-        nextButton.snp.makeConstraints { make in
-            make.height.equalTo(48)
+        mainStack.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(16)
         }
     }
     
     private func setupBindings() {
-        viewModel.$isLoading.sink { [weak self] isLoading in
-            self?.nextButton.isEnabled = !isLoading
-            self?.nextButton.alpha = isLoading ? 0.5 : 1.0
-        }
-        .store(in: &viewModel.cancellables)
-        
-        viewModel.$errorMessage.sink { [weak self] errorMessage in
-            if let errorMessage = errorMessage {
-                self?.showErrorAlert(message: errorMessage)
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                self?.nextButton.isEnabled = !isLoading
+                self?.nextButton.alpha = isLoading ? 0.5 : 1.0
             }
-        }
-        .store(in: &viewModel.cancellables)
+            .store(in: &cancellables)
         
-        viewModel.$emailSent
-            .sink { [weak self] success in
-                if success! {
-                    let confirmationVC = EmailConfirmationViewController()
-                    self?.navigationController?.pushViewController(confirmationVC, animated: true)
+        viewModel.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] errorMessage in
+                if let errorMessage = errorMessage {
+                    self?.showErrorAlert(message: errorMessage)
                 }
             }
-            .store(in: &viewModel.cancellables)
+            .store(in: &cancellables)
+        
+        viewModel.$emailSent
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] success in
+                guard success == true else { return }
+                let confirmationVC = EmailConfirmationViewController()
+                confirmationVC.user = self!.user
+                confirmationVC.modalPresentationStyle = .fullScreen
+                self?.present(confirmationVC, animated: true)
+            }
+            .store(in: &cancellables)
     }
     
+    // MARK: - Actions
     @objc private func nextButtonTapped() {
         guard let email = emailTextField.text, !email.isEmpty,
-              let iin = iinTextField.text, !iin.isEmpty else {
+              let iin = iinTextField.text, !iin.isEmpty,
+              let name = nameTextField.text, !name.isEmpty,
+              let surname = surnameTextField.text, !surname.isEmpty else {
             showErrorAlert(message: "Please fill in all fields.")
             return
         }
         
+        guard isValidEmail(email) else {
+            showErrorAlert(message: "Invalid email address.")
+            return
+        }
+        
+        user = TempUserInfo(name: name, surname: surname, email: email, iin: iin)
         viewModel.emailVerification(email: email, iin: iin)
     }
     
     @objc private func loginButtonTapped() {
-        // Navigate to the Login ViewController
         dismiss(animated: true)
     }
     
@@ -124,5 +147,22 @@ class SignUpViewController: UIViewController {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        return emailPredicate.evaluate(with: email)
+    }
+}
+
+// MARK: - Extensions
+private extension UITextField {
+    func setupPlaceholder(_ placeholder: String, keyboardType: UIKeyboardType = .default) {
+        self.placeholder = placeholder
+        self.borderStyle = .roundedRect
+        self.font = UIFont.systemFont(ofSize: 16)
+        self.keyboardType = keyboardType
+        self.autocapitalizationType = .none
     }
 }

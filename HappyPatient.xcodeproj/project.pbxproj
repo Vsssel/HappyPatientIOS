@@ -15,6 +15,7 @@
 		B82F5FC72CF9CBEF0020EEC6 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FC62CF9CBEF0020EEC6 /* SignupViewController.swift */; };
 		B82F5FC92CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */; };
 		B82F5FCB2CF9CD0F0020EEC6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FCA2CF9CD0F0020EEC6 /* SignUpViewModel.swift */; };
+		B82F5FCD2CF9D60D0020EEC6 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */; };
 		B861A9022CF8B1C1005FBABC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9012CF8B1C1005FBABC /* AppDelegate.swift */; };
 		B861A9042CF8B1C1005FBABC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */; };
 		B861A9062CF8B1C1005FBABC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9052CF8B1C1005FBABC /* ViewController.swift */; };
@@ -34,6 +35,7 @@
 		B82F5FC62CF9CBEF0020EEC6 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationViewController.swift; sourceTree = "<group>"; };
 		B82F5FCA2CF9CD0F0020EEC6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		B861A8FE2CF8B1C1005FBABC /* HappyPatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyPatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B861A9012CF8B1C1005FBABC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				B82F5FC42CF9CB930020EEC6 /* LoginModel.swift */,
+				B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				B82F5FC72CF9CBEF0020EEC6 /* SignupViewController.swift in Sources */,
 				B82F5FBE2CF9CAD50020EEC6 /* LoginViewController.swift in Sources */,
 				B861A90C2CF8B1C1005FBABC /* HappyPatient.xcdatamodeld in Sources */,
+				B82F5FCD2CF9D60D0020EEC6 /* SignUpModel.swift in Sources */,
 				B82F5FC02CF9CB310020EEC6 /* LoginViewModel.swift in Sources */,
 				B82F5FC32CF9CB730020EEC6 /* NetworkManager.swift in Sources */,
 				B861A9062CF8B1C1005FBABC /* ViewController.swift in Sources */,

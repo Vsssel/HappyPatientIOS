@@ -17,8 +17,6 @@ class LoginViewController: UIViewController {
     private lazy var usernameLabel: UILabel = createLabel(text: "Login", font: .systemFont(ofSize: 16))
     private lazy var passwordLabel: UILabel = createLabel(text: "Password", font: .systemFont(ofSize: 16))
     private lazy var titleLabel: UILabel = createLabel(text: "Login", font: .systemFont(ofSize: 25, weight: .medium), alignment: .center)
-    private lazy var usernameAsteriskIcon: UIImageView = createAsteriskIcon()
-    private lazy var passwordAsteriskIcon: UIImageView = createAsteriskIcon()
     private lazy var usernameTextField: UITextField = createTextField(placeholder: "Enter your IIN or Email")
     private lazy var passwordTextField: UITextField = {
         let textField = createTextField(placeholder: "Enter Password")
@@ -39,8 +37,8 @@ class LoginViewController: UIViewController {
 
     // MARK: - Setup Views
     private func setupViews() {
-        let usernameLabelContainer = createHorizontalStack(views: [usernameLabel, usernameAsteriskIcon])
-        let passwordLabelContainer = createHorizontalStack(views: [passwordLabel, passwordAsteriskIcon])
+        let usernameLabelContainer = createHorizontalStack(views: [usernameLabel])
+        let passwordLabelContainer = createHorizontalStack(views: [passwordLabel])
         let usernameViewStack = createVerticalStack(views: [usernameLabelContainer, usernameTextField])
         let passwordViewStack = createVerticalStack(views: [passwordLabelContainer, passwordTextField])
         let mainStack = createVerticalStack(views: [titleLabel, usernameViewStack, passwordViewStack, loginButton, signupContainer], spacing: 20)
@@ -126,16 +124,9 @@ class LoginViewController: UIViewController {
         return button
     }
 
-    private func createAsteriskIcon() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "asterisk")
-        imageView.tintColor = .red
-        return imageView
-    }
-
     private func createContainerView() -> UIView {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 10
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.3

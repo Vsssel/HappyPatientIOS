@@ -13,7 +13,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let text = UITextView()
         text.text = "Hello World"
-        print(text.text)
         view.addSubview(text)
     }
 
