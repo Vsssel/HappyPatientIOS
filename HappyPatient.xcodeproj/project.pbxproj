@@ -16,14 +16,19 @@
 		B82F5FC92CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */; };
 		B82F5FCB2CF9CD0F0020EEC6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FCA2CF9CD0F0020EEC6 /* SignUpViewModel.swift */; };
 		B82F5FCD2CF9D60D0020EEC6 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */; };
+		B8610F412D0077DD003C476D /* EducationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8610F402D0077DD003C476D /* EducationCell.swift */; };
+		B8610F432D008073003C476D /* PriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8610F422D008073003C476D /* PriceCell.swift */; };
+		B8610F452D008094003C476D /* ExperienceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8610F442D008094003C476D /* ExperienceCell.swift */; };
 		B861A9022CF8B1C1005FBABC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9012CF8B1C1005FBABC /* AppDelegate.swift */; };
 		B861A9042CF8B1C1005FBABC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */; };
-		B861A9062CF8B1C1005FBABC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9052CF8B1C1005FBABC /* ViewController.swift */; };
+		B861A9062CF8B1C1005FBABC /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861A9052CF8B1C1005FBABC /* DoctorViewController.swift */; };
 		B861A9092CF8B1C1005FBABC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B861A9082CF8B1C1005FBABC /* Base */; };
 		B861A90C2CF8B1C1005FBABC /* HappyPatient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B861A90A2CF8B1C1005FBABC /* HappyPatient.xcdatamodeld */; };
 		B861A90E2CF8B1C2005FBABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B861A90D2CF8B1C2005FBABC /* Assets.xcassets */; };
 		B861A9112CF8B1C2005FBABC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B861A9102CF8B1C2005FBABC /* Base */; };
 		B88498D92CFDD997005B2BE2 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88498D82CFDD997005B2BE2 /* AuthenticationManager.swift */; };
+		B88498DB2CFDDFAE005B2BE2 /* DoctorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88498DA2CFDDFAE005B2BE2 /* DoctorViewModel.swift */; };
+		B88498DD2CFDDFBF005B2BE2 /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88498DC2CFDDFBF005B2BE2 /* Doctor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,16 +42,21 @@
 		B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailConfirmationViewController.swift; sourceTree = "<group>"; };
 		B82F5FCA2CF9CD0F0020EEC6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		B8610F402D0077DD003C476D /* EducationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationCell.swift; sourceTree = "<group>"; };
+		B8610F422D008073003C476D /* PriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceCell.swift; sourceTree = "<group>"; };
+		B8610F442D008094003C476D /* ExperienceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceCell.swift; sourceTree = "<group>"; };
 		B861A8FE2CF8B1C1005FBABC /* HappyPatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyPatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B861A9012CF8B1C1005FBABC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B861A9032CF8B1C1005FBABC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B861A9052CF8B1C1005FBABC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B861A9052CF8B1C1005FBABC /* DoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewController.swift; sourceTree = "<group>"; };
 		B861A9082CF8B1C1005FBABC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B861A90B2CF8B1C1005FBABC /* HappyPatient.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HappyPatient.xcdatamodel; sourceTree = "<group>"; };
 		B861A90D2CF8B1C2005FBABC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B861A9102CF8B1C2005FBABC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B861A9122CF8B1C2005FBABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B88498D82CFDD997005B2BE2 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		B88498DA2CFDDFAE005B2BE2 /* DoctorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewModel.swift; sourceTree = "<group>"; };
+		B88498DC2CFDDFBF005B2BE2 /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
 		E889244DCED25F00D8BD00EB /* Pods-HappyPatient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyPatient.debug.xcconfig"; path = "Target Support Files/Pods-HappyPatient/Pods-HappyPatient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,10 +84,13 @@
 		B82F5FBB2CF9CA900020EEC6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B861A9052CF8B1C1005FBABC /* ViewController.swift */,
+				B861A9052CF8B1C1005FBABC /* DoctorViewController.swift */,
 				B82F5FBD2CF9CAD50020EEC6 /* LoginViewController.swift */,
 				B82F5FC62CF9CBEF0020EEC6 /* SignupViewController.swift */,
 				B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */,
+				B8610F402D0077DD003C476D /* EducationCell.swift */,
+				B8610F422D008073003C476D /* PriceCell.swift */,
+				B8610F442D008094003C476D /* ExperienceCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -87,6 +100,7 @@
 			children = (
 				B82F5FC42CF9CB930020EEC6 /* LoginModel.swift */,
 				B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */,
+				B88498DC2CFDDFBF005B2BE2 /* Doctor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -141,6 +155,7 @@
 			children = (
 				B82F5FBF2CF9CB310020EEC6 /* LoginViewModel.swift */,
 				B82F5FCA2CF9CD0F0020EEC6 /* SignUpViewModel.swift */,
+				B88498DA2CFDDFAE005B2BE2 /* DoctorViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -273,10 +288,15 @@
 				B861A90C2CF8B1C1005FBABC /* HappyPatient.xcdatamodeld in Sources */,
 				B82F5FCD2CF9D60D0020EEC6 /* SignUpModel.swift in Sources */,
 				B82F5FC02CF9CB310020EEC6 /* LoginViewModel.swift in Sources */,
+				B8610F452D008094003C476D /* ExperienceCell.swift in Sources */,
+				B88498DB2CFDDFAE005B2BE2 /* DoctorViewModel.swift in Sources */,
 				B82F5FC32CF9CB730020EEC6 /* NetworkManager.swift in Sources */,
-				B861A9062CF8B1C1005FBABC /* ViewController.swift in Sources */,
+				B8610F432D008073003C476D /* PriceCell.swift in Sources */,
+				B861A9062CF8B1C1005FBABC /* DoctorViewController.swift in Sources */,
 				B88498D92CFDD997005B2BE2 /* AuthenticationManager.swift in Sources */,
 				B82F5FC52CF9CB930020EEC6 /* LoginModel.swift in Sources */,
+				B8610F412D0077DD003C476D /* EducationCell.swift in Sources */,
+				B88498DD2CFDDFBF005B2BE2 /* Doctor.swift in Sources */,
 				B861A9022CF8B1C1005FBABC /* AppDelegate.swift in Sources */,
 				B82F5FC92CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift in Sources */,
 				B82F5FCB2CF9CD0F0020EEC6 /* SignUpViewModel.swift in Sources */,
