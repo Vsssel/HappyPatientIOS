@@ -27,7 +27,7 @@ class NetworkManager {
         // Use the AuthenticationManager for token management
         var headers: HTTPHeaders = []
         if auth, let token = AuthenticationManager.shared.getToken() {
-            headers.add(name: "Authorization", value: "Bearer \(token)")
+            headers.add(name: "auth", value: "Bearer \(token)")
         }
         
         return Future { promise in

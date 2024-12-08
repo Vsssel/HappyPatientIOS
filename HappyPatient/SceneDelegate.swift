@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         if AuthenticationManager.shared.isUserLoggedIn {
-            let mainViewController = ViewController()
+            let mainViewController = DoctorViewController()
             let navigationController = UINavigationController(rootViewController: mainViewController)
             window?.rootViewController = navigationController
         } else {

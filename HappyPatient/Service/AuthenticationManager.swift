@@ -57,5 +57,21 @@ class AuthenticationManager {
 
         SecItemDelete(query as CFDictionary)
     }
+    
+    func isAuth() -> Bool {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: tokenKey,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+
+        var dataTypeRef: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
+        if status == errSecSuccess, let data = dataTypeRef as? Data {
+            return ((String(data: data, encoding: .utf8)) != nil)
+        }
+        return false
+    }
 }
 
