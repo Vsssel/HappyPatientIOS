@@ -5,7 +5,7 @@ import Combine
 class AppointmentsViewController: UIViewController {
     
     private var appointments: [Appointment] = []
-    private var filteredAppointments: [Appointment] = [] // Holds the filtered appointments based on the segment
+    private var filteredAppointments: [Appointment] = []
     private var viewModel = AppointmentsViewModel()
     private var cancellables: Set<AnyCancellable> = []
     
@@ -21,12 +21,11 @@ class AppointmentsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AppointmentCell.self, forCellReuseIdentifier: AppointmentCell.identifier)
-        tableView.rowHeight = 120 // Set row height
+        tableView.rowHeight = 120
         tableView.separatorStyle = .singleLine
         return tableView
     }()
     
-    // Segmented Control to filter between Upcoming and Past appointments
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Upcoming", "Past"])
         segmentedControl.selectedSegmentIndex = 0
@@ -45,6 +44,10 @@ class AppointmentsViewController: UIViewController {
         viewModel.getAppointments()
         
         title = "My Appointments"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.getAppointments()
     }
     
     private func setupUI() {
@@ -133,7 +136,7 @@ class AppointmentsViewController: UIViewController {
         viewModel.deleteAppointment(id: appointment.id) { [weak self] success in
             guard let self = self else { return }
             if success {
-                self.appointments.remove(at: indexPath.row)
+                viewModel.getAppointments()
                 self.filterAndSortAppointments()
             } else {
                 self.showErrorAlert(message: "Failed to delete the appointment.")

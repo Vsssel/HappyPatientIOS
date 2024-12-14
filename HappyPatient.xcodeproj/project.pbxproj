@@ -111,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				B861A9052CF8B1C1005FBABC /* DoctorViewController.swift */,
+				B8E0057E2D0DD9A00049EDED /* MyProfileViewController.swift */,
 				B82F5FBD2CF9CAD50020EEC6 /* LoginViewController.swift */,
 				B82F5FC62CF9CBEF0020EEC6 /* SignupViewController.swift */,
 				B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */,
@@ -121,7 +122,6 @@
 				B8E005782D0DD8870049EDED /* ViewController.swift */,
 				B8E0057A2D0DD8F80049EDED /* AppointmentsViewController.swift */,
 				B8E0057C2D0DD95D0049EDED /* RecordsViewController.swift */,
-				B8E0057E2D0DD9A00049EDED /* MyProfileViewController.swift */,
 				B8E005822D0E0A430049EDED /* TabBarControllers.swift */,
 				B8E005882D0E11A70049EDED /* AppointmentCell.swift */,
 				B8E0058A2D0E13970049EDED /* EditAppointmentViewController.swift */,
