@@ -12,7 +12,7 @@ import Combine
 class NetworkManager {
     
     static let shared = NetworkManager()
-    private let baseURL = "http://localhost:2222"
+    private let baseURL = "http://64.225.71.203:2222"
 
     private init() {}
 
