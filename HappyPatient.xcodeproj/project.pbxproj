@@ -29,6 +29,10 @@
 		B88498D92CFDD997005B2BE2 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88498D82CFDD997005B2BE2 /* AuthenticationManager.swift */; };
 		B88498DB2CFDDFAE005B2BE2 /* DoctorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88498DA2CFDDFAE005B2BE2 /* DoctorViewModel.swift */; };
 		B88498DD2CFDDFBF005B2BE2 /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88498DC2CFDDFBF005B2BE2 /* Doctor.swift */; };
+		B8E005712D0D981D0049EDED /* MakeAppointmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E005702D0D981D0049EDED /* MakeAppointmentViewModel.swift */; };
+		B8E005732D0D98340049EDED /* MakeAppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E005722D0D98340049EDED /* MakeAppointmentViewController.swift */; };
+		B8E005752D0D98F10049EDED /* AppointmentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E005742D0D98F10049EDED /* AppointmentResponse.swift */; };
+		B8E005772D0D99010049EDED /* Slots.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E005762D0D99010049EDED /* Slots.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +61,10 @@
 		B88498D82CFDD997005B2BE2 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		B88498DA2CFDDFAE005B2BE2 /* DoctorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewModel.swift; sourceTree = "<group>"; };
 		B88498DC2CFDDFBF005B2BE2 /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
+		B8E005702D0D981D0049EDED /* MakeAppointmentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeAppointmentViewModel.swift; sourceTree = "<group>"; };
+		B8E005722D0D98340049EDED /* MakeAppointmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeAppointmentViewController.swift; sourceTree = "<group>"; };
+		B8E005742D0D98F10049EDED /* AppointmentResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppointmentResponse.swift; path = HappyPatient/Model/AppointmentResponse.swift; sourceTree = SOURCE_ROOT; };
+		B8E005762D0D99010049EDED /* Slots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slots.swift; sourceTree = "<group>"; };
 		E889244DCED25F00D8BD00EB /* Pods-HappyPatient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyPatient.debug.xcconfig"; path = "Target Support Files/Pods-HappyPatient/Pods-HappyPatient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +96,7 @@
 				B82F5FBD2CF9CAD50020EEC6 /* LoginViewController.swift */,
 				B82F5FC62CF9CBEF0020EEC6 /* SignupViewController.swift */,
 				B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */,
+				B8E005722D0D98340049EDED /* MakeAppointmentViewController.swift */,
 				B8610F402D0077DD003C476D /* EducationCell.swift */,
 				B8610F422D008073003C476D /* PriceCell.swift */,
 				B8610F442D008094003C476D /* ExperienceCell.swift */,
@@ -98,6 +107,8 @@
 		B82F5FBC2CF9CAA40020EEC6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B8E005742D0D98F10049EDED /* AppointmentResponse.swift */,
+				B8E005762D0D99010049EDED /* Slots.swift */,
 				B82F5FC42CF9CB930020EEC6 /* LoginModel.swift */,
 				B82F5FCC2CF9D60D0020EEC6 /* SignUpModel.swift */,
 				B88498DC2CFDDFBF005B2BE2 /* Doctor.swift */,
@@ -155,6 +166,7 @@
 			children = (
 				B82F5FBF2CF9CB310020EEC6 /* LoginViewModel.swift */,
 				B82F5FCA2CF9CD0F0020EEC6 /* SignUpViewModel.swift */,
+				B8E005702D0D981D0049EDED /* MakeAppointmentViewModel.swift */,
 				B88498DA2CFDDFAE005B2BE2 /* DoctorViewModel.swift */,
 			);
 			path = ViewModel;
@@ -294,14 +306,16 @@
 				B8610F432D008073003C476D /* PriceCell.swift in Sources */,
 				B861A9062CF8B1C1005FBABC /* DoctorViewController.swift in Sources */,
 				B88498D92CFDD997005B2BE2 /* AuthenticationManager.swift in Sources */,
-				B852ADA42D05BC5000B0EC91 /* Slots.swift in Sources */,
 				B82F5FC52CF9CB930020EEC6 /* LoginModel.swift in Sources */,
 				B8610F412D0077DD003C476D /* EducationCell.swift in Sources */,
 				B88498DD2CFDDFBF005B2BE2 /* Doctor.swift in Sources */,
 				B861A9022CF8B1C1005FBABC /* AppDelegate.swift in Sources */,
-				B8E022362D0D843D009EE13C /* AppointmentResponse.swift in Sources */,
+				B8E005752D0D98F10049EDED /* AppointmentResponse.swift in Sources */,
 				B82F5FC92CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift in Sources */,
 				B82F5FCB2CF9CD0F0020EEC6 /* SignUpViewModel.swift in Sources */,
+				B8E005712D0D981D0049EDED /* MakeAppointmentViewModel.swift in Sources */,
+				B8E005772D0D99010049EDED /* Slots.swift in Sources */,
+				B8E005732D0D98340049EDED /* MakeAppointmentViewController.swift in Sources */,
 				B861A9042CF8B1C1005FBABC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

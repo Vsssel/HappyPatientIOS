@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import SnapKit
 
-class DoctorViewController: UIViewController {
+class DoctorViewController: UIViewController, UITableViewDelegate {
     private let viewModel = DoctorViewModel()
     public var doctor: Doctor? {
         didSet {
@@ -38,11 +38,7 @@ class DoctorViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupTables()
-<<<<<<< HEAD
-        viewModel.getDoctor(id: 7)
-=======
         viewModel.getDoctor(id: 4)
->>>>>>> 2d72660 (done single doctor view)
         bindViewModel()
     }
 
@@ -86,10 +82,6 @@ class DoctorViewController: UIViewController {
                 }
             }
             
-<<<<<<< HEAD
-            // Reload table views
-=======
->>>>>>> 2d72660 (done single doctor view)
             self?.educationTableView.reloadData()
             self?.experienceTableView.reloadData()
             self?.priceListTableView.reloadData()
@@ -113,48 +105,23 @@ class DoctorViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .systemBackground
 
-<<<<<<< HEAD
-        // Create the container for the doctor's details
-        let detailsContainer = createContainerView()
-        view.addSubview(detailsContainer)
-
-        // Add the doctor's image and name
-        detailsContainer.addSubview(doctorImage)
-        detailsContainer.addSubview(nameLabel)
-
-        // Create the first row of icon-label pairs
-=======
         let detailsContainer = createContainerView()
         view.addSubview(detailsContainer)
 
         detailsContainer.addSubview(doctorImage)
         detailsContainer.addSubview(nameLabel)
 
->>>>>>> 2d72660 (done single doctor view)
         let categoryView = createIconWithLabel(iconName: "person.text.rectangle", label: categoryLabel)
         let experienceView = createIconWithLabel(iconName: "clock", label: experienceLabel)
         let priceView = createIconWithLabel(iconName: "dollarsign.circle", label: priceLabel)
         let firstRowStack = createHorizontalStack(views: [categoryView, experienceView, priceView], spacing: 16)
-
-<<<<<<< HEAD
-        // Create the second row of icon-label pairs
-=======
->>>>>>> 2d72660 (done single doctor view)
         let addressView = createIconWithLabel(iconName: "map", label: addressLabel)
         let officeView = createIconWithLabel(iconName: "building.2", label: officeLabel)
         let secondRowStack = createHorizontalStack(views: [addressView, officeView], spacing: 16)
 
-<<<<<<< HEAD
-        // Combine the rows into a vertical stack
         let verticalStack = createVerticalStack(views: [firstRowStack, secondRowStack], spacing: 16)
         detailsContainer.addSubview(verticalStack)
 
-        // Layout the details container
-=======
-        let verticalStack = createVerticalStack(views: [firstRowStack, secondRowStack], spacing: 16)
-        detailsContainer.addSubview(verticalStack)
-
->>>>>>> 2d72660 (done single doctor view)
         detailsContainer.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
@@ -176,10 +143,6 @@ class DoctorViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(16)
         }
 
-<<<<<<< HEAD
-        // Create a container for the tables
-=======
->>>>>>> 2d72660 (done single doctor view)
         let tableStack = createVerticalStack(views: [educationTableView, experienceTableView, priceListTableView], spacing: 16)
         detailsContainer.addSubview(tableStack)
 
@@ -205,18 +168,11 @@ class DoctorViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalToSuperview().inset(16)
         }
-<<<<<<< HEAD
-    }
-
-
-
-=======
         
         makeAppointmentButton.addTarget(self, action: #selector(makeAppointment), for: .touchUpInside)
 
     }
 
->>>>>>> 2d72660 (done single doctor view)
     private func createIconWithLabel(iconName: String, label: UILabel) -> UIView {
         let iconImageView = UIImageView(image: UIImage(systemName: iconName))
         iconImageView.contentMode = .scaleAspectFit
@@ -292,8 +248,6 @@ class DoctorViewController: UIViewController {
         doctorImage.image = UIImage(named: doctor.avatarUrl) // Adjust as needed
         tableView.reloadData()
     }
-<<<<<<< HEAD
-=======
     
     @objc private func makeAppointment() {
         let makeAppointmentVC = MakeAppointmentViewController()
@@ -312,11 +266,9 @@ class DoctorViewController: UIViewController {
         present(makeAppointmentVC, animated: true, completion: nil)
     }
 
-
->>>>>>> 2d72660 (done single doctor view)
 }
 
-extension DoctorViewController: UITableViewDataSource, UITableViewDelegate {
+extension DoctorViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -345,30 +297,6 @@ extension DoctorViewController: UITableViewDataSource, UITableViewDelegate {
             return nil
         }
         
-<<<<<<< HEAD
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            if tableView == educationTableView {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "EducationCell", for: indexPath)
-                guard let doctor = doctor else { return cell }
-                let education = doctor.education[indexPath.row]
-                cell.textLabel?.text = "\(education.organization) (\(education.startYear) - \(education.endYear)) GPA: \(education.gpa)/\(education.gpaFrom)"
-                return cell
-            } else if tableView == experienceTableView {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ExperienceCell", for: indexPath)
-                guard let doctor = doctor else { return cell }
-                let experience = doctor.experience[indexPath.row]
-                cell.textLabel?.text = "\(experience.organization) - \(experience.position) (\(experience.startDate) - \(experience.endDate))"
-                return cell
-            } else if tableView == priceListTableView {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PriceListCell", for: indexPath)
-                guard let doctor = doctor else { return cell }
-                let price = doctor.priceList[indexPath.row]
-                cell.textLabel?.text = "\(price.typeName): \(price.price)₸"
-                return cell
-            }
-            return UITableViewCell()
-        }
-=======
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == educationTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EducationCell", for: indexPath)
@@ -391,7 +319,5 @@ extension DoctorViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return UITableViewCell()
     }
-
->>>>>>> 2d72660 (done single doctor view)
 
 }
