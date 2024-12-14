@@ -140,16 +140,13 @@ class EmailConfirmationViewController: UIViewController {
             return
         }
 
-        // Ensure passwords match
         if password != passwordConfirmation {
             showErrorAlert(message: "Passwords do not match.")
             return
         }
 
-        // Get selected gender
         let gender = genderSegmentedControl.selectedSegmentIndex == 0 ? "male" : "female"
 
-        // Collect parameters
         let params = SignUpRequest(
             name: user.name,
             surname: user.surname,
@@ -161,11 +158,7 @@ class EmailConfirmationViewController: UIViewController {
             password: password
         )
 
-        // Call sign-up function
         viewModel.signUp(params: params)
-
-        // Debug print
-        print("Sign-Up Data: Birthdate: \(params.birthDate), Name: \(params.name), Surname: \(params.surname), IIN: \(params.iin), Email: \(params.email), Verification Code: \(params.emailVerificationCode), Gender: \(params.gender)")
     }
     
     private func setupBindings() {
@@ -189,7 +182,7 @@ class EmailConfirmationViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] success in
                 guard success == true else { return }
-                let viewVC = ViewController()
+                let viewVC = DoctorViewController()
                 viewVC.modalPresentationStyle = .fullScreen
                 self?.present(viewVC, animated: true)
             }
