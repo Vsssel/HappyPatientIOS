@@ -91,7 +91,7 @@ class MakeAppointmentViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         view.addSubview(selectorSegmentedControl)
         view.addSubview(datePicker)
