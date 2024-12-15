@@ -11,7 +11,6 @@ import UIKit
 class TabBarControllers: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let mainVC = DoctorViewController()
         let appointmentsVC = AppointmentsViewController()
         let recordsVC = RecordsViewController()
@@ -31,5 +30,9 @@ class TabBarControllers: UITabBarController {
         for i in 0...3 {
             items[i].image = UIImage(systemName: images[i])
         }
+        self.tabBar.backgroundColor = UIColor.systemGray6
+        self.tabBar.barTintColor = UIColor.systemGray6
+        self.tabBar.unselectedItemTintColor = UIColor.lightGray
+        self.tabBar.tintColor = UIColor.systemBlue
     }
 }

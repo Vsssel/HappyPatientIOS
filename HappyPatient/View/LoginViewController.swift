@@ -78,7 +78,7 @@ class LoginViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] success in
                 guard success != nil else { return }
-                let mainVC = DoctorViewController()
+                let mainVC = TabBarControllers()
                 mainVC.modalPresentationStyle = .fullScreen
                 self?.present(mainVC, animated: true)
             }

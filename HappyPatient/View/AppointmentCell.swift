@@ -105,7 +105,7 @@ class AppointmentCell: UITableViewCell {
     func configure(with appointment: Appointment) {
         doctorLabel.text = "Dr. \(appointment.doctor.name) \(appointment.doctor.surname)"
         typeLabel.text = "Type: \(appointment.type.name)"
-        dateLabel.text = "\(appointment.date) | \(appointment.startTime) - \(appointment.endTime)"
+        dateLabel.text = "\(appointment.date) | \(formatTime(appointment.startTime) ?? "00:00") - \(formatTime(appointment.endTime) ?? "00:00")"
         addressLabel.text = "Room: \(appointment.room.title), Address: \(appointment.room.address)"
         
         if let url = URL(string: appointment.doctor.avatarUrl) {
@@ -116,8 +116,21 @@ class AppointmentCell: UITableViewCell {
 
     }
     
+    func formatTime(_ time: String) -> String? {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "HH:mm:ss"
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "HH:mm"
+        
+        if let date = inputFormatter.date(from: time) {
+            return outputFormatter.string(from: date)
+        }
+        return nil
+    }
+    
     private func loadImage(from url: URL) {
-        doctorImageView.image = UIImage(named: "placeholder") // Reset image
+        doctorImageView.image = UIImage(named: "placeholder")
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let self = self,
                   let data = data,

@@ -116,33 +116,58 @@ class AppointmentsViewController: UIViewController {
         let appointment = filteredAppointments[indexPath.row]
         let editViewController = EditAppointmentViewController(appointment: appointment)
         
-        editViewController.modalPresentationStyle = .formSheet
-        editViewController.onSave = { [weak self] updatedAppointment in
-            guard let self = self else { return }
-            self.appointments[indexPath.row] = updatedAppointment
-            self.filterAndSortAppointments()
+        editViewController.modalPresentationStyle = .pageSheet
+        editViewController.modalTransitionStyle = .coverVertical
+
+        if let sheet = editViewController.sheetPresentationController {
+            sheet.detents = [.custom { context in
+                return UIScreen.main.bounds.height * 0.3
+            }]
+            sheet.prefersGrabberVisible = true
+        }
+        
+        editViewController.onSave = { [weak self] success in
+            if success {
+                self!.viewModel.getAppointments()
+                self!.filterAndSortAppointments()
+            }
         }
         present(editViewController, animated: true)
     }
+
+
     
     private func deleteAppointment(at indexPath: IndexPath) {
         let appointment = filteredAppointments[indexPath.row]
-        let fullDateString = "\(appointment.date) \(appointment.startTime)"
+        let alert = UIAlertController(
+            title: "Confirmation",
+            message: "Are you sure to delete appointment?",
+            preferredStyle: .alert
+        )
         
-        if let appointmentDateTime = dateFormatter.date(from: fullDateString), Date.now > appointmentDateTime {
-            showErrorAlert(message: "You cannot delete past appointments")
-            return
-        }
-        viewModel.deleteAppointment(id: appointment.id) { [weak self] success in
+        alert.addAction(UIAlertAction(title: "No", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] _ in
             guard let self = self else { return }
-            if success {
-                viewModel.getAppointments()
-                self.filterAndSortAppointments()
-            } else {
-                self.showErrorAlert(message: "Failed to delete the appointment.")
+            self.viewModel.deleteAppointment(id: appointment.id) { success in
+                if success {
+                    self.viewModel.getAppointments()
+                    self.filterAndSortAppointments()
+                } else {
+                    self.showErrorAlert(message: "Failed to delete the appointment.")
+                }
             }
+        }))
+        
+        if let presentedViewController = self.presentedViewController {
+            presentedViewController.dismiss(animated: false) {
+                self.present(alert, animated: true)
+            }
+        } else {
+            self.present(alert, animated: true)
         }
     }
+
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource

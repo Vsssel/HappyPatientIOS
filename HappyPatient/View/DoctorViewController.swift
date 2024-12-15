@@ -18,7 +18,7 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
     }
     private var cancellables: Set<AnyCancellable> = []
     private lazy var doctorImage: UIImageView = {
-        let imageView = createImageView(cornerRadius: 30)
+        let imageView = createImageView(cornerRadius: 60)
         return imageView
     }()
     private lazy var nameLabel: UILabel = createLabel(text: "Doctor Name", font: .boldSystemFont(ofSize: 18))
@@ -128,18 +128,19 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
         }
 
         doctorImage.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(16)
-            make.size.equalTo(CGSize(width: 60, height: 60))
+            make.top.equalToSuperview().inset(16)
+            make.centerX.equalToSuperview()
+            make.size.equalTo(CGSize(width: 120, height: 120))
         }
 
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalTo(doctorImage.snp.trailing).offset(8)
-            make.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(doctorImage.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
         }
 
+
         verticalStack.snp.makeConstraints { make in
-            make.top.equalTo(doctorImage.snp.bottom).offset(16)
+            make.top.equalTo(nameLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
         }
 
@@ -153,13 +154,13 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
 
         // Assign fixed heights to the table views
         educationTableView.snp.makeConstraints { make in
-            make.height.equalTo(120)
+            make.height.equalTo(100)
         }
         experienceTableView.snp.makeConstraints { make in
-            make.height.equalTo(120)
+            make.height.equalTo(100)
         }
         priceListTableView.snp.makeConstraints { make in
-            make.height.equalTo(120)
+            make.height.equalTo(100)
         }
         
         detailsContainer.addSubview(makeAppointmentButton)
@@ -189,9 +190,14 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
     private func createButton(title: String, backgroundColor: UIColor = .clear, textColor: UIColor = .white, action: Selector? = nil) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)
-        button.backgroundColor = backgroundColor
-        button.setTitleColor(textColor, for: .normal)
-        button.layer.cornerRadius = 8
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor.systemBlue
+        button.layer.cornerRadius = 10
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.2
+        button.layer.shadowOffset = CGSize(width: 0, height: 5)
+        button.layer.shadowRadius = 10
         if let action = action {
             button.addTarget(self, action: action, for: .touchUpInside)
         }
@@ -258,7 +264,7 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
 
         if let sheet = makeAppointmentVC.sheetPresentationController {
             sheet.detents = [.custom { context in
-                return UIScreen.main.bounds.height * 0.3  // 30% of screen height
+                return UIScreen.main.bounds.height * 0.3
             }]
             sheet.prefersGrabberVisible = true
         }
