@@ -41,6 +41,16 @@ class RecordsViewController: UIViewController {
         return segmentedControl
     }()
     
+    private lazy var noRecordsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No Records"
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .gray
+        label.isHidden = true
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -63,6 +73,7 @@ class RecordsViewController: UIViewController {
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
         view.addSubview(loadingIndicator)
+        view.addSubview(noRecordsLabel)
         
         segmentedControl.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
@@ -78,6 +89,10 @@ class RecordsViewController: UIViewController {
         loadingIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+        
+        noRecordsLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     private func setupBindings() {
@@ -86,6 +101,7 @@ class RecordsViewController: UIViewController {
             .sink { [weak self] records in
                 guard let self = self else { return }
                 self.records = records?.page ?? []
+                self.updateUIVisibility()
                 self.tableView.reloadData()
             }
             .store(in: &cancellables)
@@ -104,13 +120,25 @@ class RecordsViewController: UIViewController {
                 guard let self = self else { return }
                 self.loadingIndicator.isHidden = !isLoading
                 isLoading ? self.loadingIndicator.startAnimating() : self.loadingIndicator.stopAnimating()
-                self.tableView.isHidden = isLoading
+                self.updateUIVisibility(isLoading: isLoading)
             }
             .store(in: &cancellables)
     }
-    
+
+    private func updateUIVisibility(isLoading: Bool = false) {
+        if isLoading {
+            tableView.isHidden = true
+            noRecordsLabel.isHidden = true
+        } else {
+            let hasRecords = !records.isEmpty
+            tableView.isHidden = !hasRecords
+            noRecordsLabel.isHidden = hasRecords
+        }
+    }
+
     private func fetchRecords() {
         viewModel.getRecords(recordType: selectedOption)
+        tableView.reloadData()
     }
     
     private func showErrorAlert(message: String) {
@@ -122,7 +150,10 @@ class RecordsViewController: UIViewController {
 
 extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return records.count
+        let hasRecords = records.count
+        tableView.isHidden = hasRecords == 0
+        noRecordsLabel.isHidden = hasRecords != 0
+        return hasRecords
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -38,23 +38,33 @@ class AppointmentsViewController: UIViewController {
         return segmentedControl
     }()
     
+    private lazy var noAppointmentsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No Appointments"
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .gray
+        label.isHidden = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupBindings()
         viewModel.getAppointments()
-        
-        title = "My Appointments"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         viewModel.getAppointments()
+        tableView.reloadData()
     }
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
+        view.addSubview(noAppointmentsLabel)
         view.addSubview(loadingIndicator)
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +82,10 @@ class AppointmentsViewController: UIViewController {
         }
         
         loadingIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        noAppointmentsLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
     }
@@ -100,9 +114,20 @@ class AppointmentsViewController: UIViewController {
                 guard let self = self else { return }
                 self.loadingIndicator.isHidden = !isLoading
                 isLoading ? self.loadingIndicator.startAnimating() : self.loadingIndicator.stopAnimating()
-                self.tableView.isHidden = isLoading
+                updateUIVisibility(isLoading: isLoading)
             }
             .store(in: &cancellables)
+    }
+    
+    private func updateUIVisibility(isLoading: Bool = false) {
+        if isLoading {
+            tableView.isHidden = true
+            noAppointmentsLabel.isHidden = true
+        } else {
+            let hasAppointments = !filteredAppointments.isEmpty
+            tableView.isHidden = !hasAppointments
+            noAppointmentsLabel.isHidden = hasAppointments
+        }
     }
     
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
@@ -188,7 +213,10 @@ class AppointmentsViewController: UIViewController {
 
 extension AppointmentsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredAppointments.count
+        let hasAppointments = filteredAppointments.count
+        tableView.isHidden = hasAppointments == 0
+        noAppointmentsLabel.isHidden = hasAppointments != 0
+        return hasAppointments
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -107,6 +107,7 @@ class MyProfileViewController: UIViewController {
             .sink { [weak self] isLoading in
                 self?.loadingIndicator.isHidden = !isLoading
                 isLoading ? self?.loadingIndicator.startAnimating() : self?.loadingIndicator.stopAnimating()
+                self?.logoutButton.isHidden = isLoading
             }
             .store(in: &cancellables)
 

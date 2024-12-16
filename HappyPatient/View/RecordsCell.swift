@@ -39,7 +39,7 @@ class RecordsCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0 // Allow unlimited lines
+        label.numberOfLines = 0
         return label
     }()
     
