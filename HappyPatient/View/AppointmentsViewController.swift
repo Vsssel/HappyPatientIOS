@@ -8,6 +8,7 @@ class AppointmentsViewController: UIViewController {
     private var filteredAppointments: [Appointment] = []
     private var viewModel = AppointmentsViewModel()
     private var cancellables: Set<AnyCancellable> = []
+    private let loadingIndicator = UIActivityIndicatorView(style: .large)
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -37,23 +38,34 @@ class AppointmentsViewController: UIViewController {
         return segmentedControl
     }()
     
+    private lazy var noAppointmentsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No Appointments"
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .gray
+        label.isHidden = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupBindings()
         viewModel.getAppointments()
-        
-        title = "My Appointments"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         viewModel.getAppointments()
+        tableView.reloadData()
     }
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
+        view.addSubview(noAppointmentsLabel)
+        view.addSubview(loadingIndicator)
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.snp.makeConstraints { make in
@@ -64,10 +76,18 @@ class AppointmentsViewController: UIViewController {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(10)
-           make.leading.equalTo(view.snp.leading)
-           make.trailing.equalTo(view.snp.trailing)
-           make.bottom.equalTo(view.snp.bottom)
-       }
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.bottom.equalTo(view.snp.bottom)
+        }
+        
+        loadingIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        noAppointmentsLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     private func setupBindings() {
@@ -87,6 +107,27 @@ class AppointmentsViewController: UIViewController {
                 self?.showErrorAlert(message: errorMessage)
             }
             .store(in: &cancellables)
+        
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                guard let self = self else { return }
+                self.loadingIndicator.isHidden = !isLoading
+                isLoading ? self.loadingIndicator.startAnimating() : self.loadingIndicator.stopAnimating()
+                updateUIVisibility(isLoading: isLoading)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func updateUIVisibility(isLoading: Bool = false) {
+        if isLoading {
+            tableView.isHidden = true
+            noAppointmentsLabel.isHidden = true
+        } else {
+            let hasAppointments = !filteredAppointments.isEmpty
+            tableView.isHidden = !hasAppointments
+            noAppointmentsLabel.isHidden = hasAppointments
+        }
     }
     
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
@@ -116,40 +157,66 @@ class AppointmentsViewController: UIViewController {
         let appointment = filteredAppointments[indexPath.row]
         let editViewController = EditAppointmentViewController(appointment: appointment)
         
-        editViewController.modalPresentationStyle = .formSheet
-        editViewController.onSave = { [weak self] updatedAppointment in
-            guard let self = self else { return }
-            self.appointments[indexPath.row] = updatedAppointment
-            self.filterAndSortAppointments()
+        editViewController.modalPresentationStyle = .pageSheet
+        editViewController.modalTransitionStyle = .coverVertical
+
+        if let sheet = editViewController.sheetPresentationController {
+            sheet.detents = [.custom { context in
+                return UIScreen.main.bounds.height * 0.3
+            }]
+            sheet.prefersGrabberVisible = true
+        }
+        
+        editViewController.onSave = { [weak self] success in
+            if success {
+                self!.viewModel.getAppointments()
+                self!.filterAndSortAppointments()
+            }
         }
         present(editViewController, animated: true)
     }
+
+
     
     private func deleteAppointment(at indexPath: IndexPath) {
         let appointment = filteredAppointments[indexPath.row]
-        let fullDateString = "\(appointment.date) \(appointment.startTime)"
+        let alert = UIAlertController(
+            title: "Confirmation",
+            message: "Are you sure to delete appointment?",
+            preferredStyle: .alert
+        )
         
-        if let appointmentDateTime = dateFormatter.date(from: fullDateString), Date.now > appointmentDateTime {
-            showErrorAlert(message: "You cannot delete past appointments")
-            return
-        }
-        viewModel.deleteAppointment(id: appointment.id) { [weak self] success in
+        alert.addAction(UIAlertAction(title: "No", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] _ in
             guard let self = self else { return }
-            if success {
-                viewModel.getAppointments()
-                self.filterAndSortAppointments()
-            } else {
-                self.showErrorAlert(message: "Failed to delete the appointment.")
+            self.viewModel.deleteAppointment(id: appointment.id) { success in
+                if success {
+                    self.viewModel.getAppointments()
+                    self.filterAndSortAppointments()
+                } else {
+                    self.showErrorAlert(message: "Failed to delete the appointment.")
+                }
             }
+        }))
+        
+        if let presentedViewController = self.presentedViewController {
+            presentedViewController.dismiss(animated: false) {
+                self.present(alert, animated: true)
+            }
+        } else {
+            self.present(alert, animated: true)
         }
     }
-}
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
+}
 
 extension AppointmentsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredAppointments.count
+        let hasAppointments = filteredAppointments.count
+        tableView.isHidden = hasAppointments == 0
+        noAppointmentsLabel.isHidden = hasAppointments != 0
+        return hasAppointments
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

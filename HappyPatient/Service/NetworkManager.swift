@@ -19,24 +19,32 @@ class NetworkManager {
     func request<T: Decodable>(_ endpoint: String,
                                method: HTTPMethod,
                                parameters: [String: Any]? = nil,
+                               queryItems: [URLQueryItem]? = nil,
                                auth: Bool = false,
                                responseType: T.Type) -> AnyPublisher<T, Error> {
         
-        let url = "\(baseURL)\(endpoint)"
+        var urlComponents = URLComponents(string: "\(baseURL)\(endpoint)")
+        if let queryItems = queryItems {
+            urlComponents?.queryItems = queryItems
+        }
         
-        // Use the AuthenticationManager for token management
+        guard let url = urlComponents?.url else {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        
         var headers: HTTPHeaders = []
         if auth, let token = AuthenticationManager.shared.getToken() {
-            headers.add(name: "auth", value: "Bearer \(token)")
+            headers.add(name: "Auth", value: "Bearer \(token)")
         }
         
         return Future { promise in
-            AF.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            let encoding: ParameterEncoding = (method == .get || method == .delete) ? URLEncoding.default : JSONEncoding.default
+            
+            AF.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
                 .validate()
                 .responseDecodable(of: T.self) { response in
                     debugPrint(response)
                     
-                    // Check for a new token in response header and update it
                     if let authorizationHeader = response.response?.allHeaderFields["auth"] as? String {
                         let token = authorizationHeader.replacingOccurrences(of: "Bearer ", with: "")
                         print("NM Token: \(token)")

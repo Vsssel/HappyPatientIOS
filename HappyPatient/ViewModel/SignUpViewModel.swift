@@ -75,7 +75,7 @@ class SignUpViewModel: ObservableObject {
             self?.isLoading = false
             switch completion {
             case .failure(let error):
-                self?.errorMessage = error.localizedDescription
+                self?.errorMessage = error.asAFError?.errorDescription
             case .finished:
                 break
             }

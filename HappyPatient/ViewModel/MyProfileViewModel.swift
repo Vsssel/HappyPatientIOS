@@ -1,36 +1,30 @@
 //
-//  LoginViewModel.swift
+//  MyProfileViewModel.swift
 //  HappyPatient
 //
-//  Created by Assel Artykbay on 29.11.2024.
+//  Created by Assel Artykbay on 15.12.2024.
 //
 
 import Foundation
 import Combine
 
-class LoginViewModel: ObservableObject {
+class MyProfileViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var user: User?
 
     private var cancellables: Set<AnyCancellable> = []
 
-    func login(username: String, password: String) {
+    func getUser() {
         isLoading = true
         errorMessage = nil
+        let isAuth = AuthenticationManager.shared.isAuth()
 
-        let parameters: [String: Any] = [
-            "login": username,
-            "password": password
-        ]
-
-        NetworkManager.shared.request("/auth",
-                                      method: .post,
-                                      parameters: parameters,
-                                      auth: false,
+        NetworkManager.shared.request("/patient/auth",
+                                      method: .get,
+                                      auth: isAuth,
                                       responseType: User.self)
             .sink(receiveCompletion: { [weak self] completion in
-                print(completion)
                 self?.isLoading = false
                 if case .failure(let error) = completion {
                     self?.errorMessage = error.localizedDescription
@@ -41,3 +35,4 @@ class LoginViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 }
+

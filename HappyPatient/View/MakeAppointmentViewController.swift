@@ -78,7 +78,7 @@ class MakeAppointmentViewController: UIViewController {
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = .gray
-        label.isHidden = true // Initially hidden
+        label.isHidden = true
         return label
     }()
 
