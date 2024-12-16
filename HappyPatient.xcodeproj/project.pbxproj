@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		44B782C23438C609DCF526BF /* Pods_HappyPatient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B835E3C8C9A91457A7A6FC1 /* Pods_HappyPatient.framework */; };
+		5A11996A2D1093BF00ADB204 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1199692D1093BF00ADB204 /* SearchViewController.swift */; };
+		5A11996C2D1093C500ADB204 /* DoctorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A11996B2D1093C500ADB204 /* DoctorCell.swift */; };
 		B82F5FBE2CF9CAD50020EEC6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FBD2CF9CAD50020EEC6 /* LoginViewController.swift */; };
 		B82F5FC02CF9CB310020EEC6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FBF2CF9CB310020EEC6 /* LoginViewModel.swift */; };
 		B82F5FC32CF9CB730020EEC6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82F5FC22CF9CB730020EEC6 /* NetworkManager.swift */; };
@@ -50,6 +52,8 @@
 
 /* Begin PBXFileReference section */
 		4B835E3C8C9A91457A7A6FC1 /* Pods_HappyPatient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HappyPatient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A1199692D1093BF00ADB204 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		5A11996B2D1093C500ADB204 /* DoctorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorCell.swift; sourceTree = "<group>"; };
 		9252BB57620939076A833D09 /* Pods-HappyPatient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HappyPatient.release.xcconfig"; path = "Target Support Files/Pods-HappyPatient/Pods-HappyPatient.release.xcconfig"; sourceTree = "<group>"; };
 		B82F5FBD2CF9CAD50020EEC6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B82F5FBF2CF9CB310020EEC6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -123,7 +127,12 @@
 				B82F5FBD2CF9CAD50020EEC6 /* LoginViewController.swift */,
 				B82F5FC62CF9CBEF0020EEC6 /* SignupViewController.swift */,
 				B82F5FC82CF9CC2F0020EEC6 /* EmailConfirmationViewController.swift */,
+				5A11996B2D1093C500ADB204 /* DoctorCell.swift */,
 				B8E005722D0D98340049EDED /* MakeAppointmentViewController.swift */,
+				B8610F402D0077DD003C476D /* EducationCell.swift */,
+				5A1199692D1093BF00ADB204 /* SearchViewController.swift */,
+				B8610F422D008073003C476D /* PriceCell.swift */,
+				B8610F442D008094003C476D /* ExperienceCell.swift */,
 				B8E005782D0DD8870049EDED /* ViewController.swift */,
 				B8E0057A2D0DD8F80049EDED /* AppointmentsViewController.swift */,
 				B8E0057C2D0DD95D0049EDED /* RecordsViewController.swift */,
@@ -237,6 +246,8 @@
 			dependencies = (
 			);
 			name = HappyPatient;
+			packageProductDependencies = (
+			);
 			productName = HappyPatient;
 			productReference = B861A8FE2CF8B1C1005FBABC /* HappyPatient.app */;
 			productType = "com.apple.product-type.application";
@@ -265,6 +276,8 @@
 				Base,
 			);
 			mainGroup = B861A8F52CF8B1C1005FBABC;
+			packageReferences = (
+			);
 			productRefGroup = B861A8FF2CF8B1C1005FBABC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -347,12 +360,14 @@
 				B8E005832D0E0A430049EDED /* TabBarControllers.swift in Sources */,
 				B8E005852D0E0D4E0049EDED /* AppointmentsViewModel.swift in Sources */,
 				B8E0058F2D0EEBA60049EDED /* EditAppointmentViewModel.swift in Sources */,
+				5A11996C2D1093C500ADB204 /* DoctorCell.swift in Sources */,
 				B88498DB2CFDDFAE005B2BE2 /* DoctorViewModel.swift in Sources */,
 				B87196422D0F60E6009512F7 /* ErrorResponse.swift in Sources */,
 				B8E005792D0DD8870049EDED /* ViewController.swift in Sources */,
 				B82F5FC32CF9CB730020EEC6 /* NetworkManager.swift in Sources */,
 				B8E0057D2D0DD95D0049EDED /* RecordsViewController.swift in Sources */,
 				B861A9062CF8B1C1005FBABC /* DoctorViewController.swift in Sources */,
+				5A11996A2D1093BF00ADB204 /* SearchViewController.swift in Sources */,
 				B88498D92CFDD997005B2BE2 /* AuthenticationManager.swift in Sources */,
 				B82F5FC52CF9CB930020EEC6 /* LoginModel.swift in Sources */,
 				B88498DD2CFDDFBF005B2BE2 /* Doctor.swift in Sources */,
