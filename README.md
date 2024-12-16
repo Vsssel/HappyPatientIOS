@@ -13,3 +13,6 @@ Functions:
 7. Delete made appointment for a doctor DELETE http://64.225.71.203:2222/patient/appointments/{id}
 8. View made appointment list by upcoming and past GET http://64.225.71.203:2222/patient/appointments
 9. View medical records that are made by doctors GET http://64.225.71.203:2222/patient/medical-records
+
+
+Youtube link: https://youtu.be/-3oVaNeGzgQ
