@@ -12,7 +12,7 @@ import SnapKit
 class DoctorViewController: UIViewController, UITableViewDelegate {
     private let viewModel = DoctorViewModel()
     private let loadingIndicator = UIActivityIndicatorView(style: .large)
-
+    private let doctorId: Int?
     public var doctor: Doctor? {
         didSet {
             updateDoctorUI()
@@ -41,10 +41,19 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         setupUI()
         setupTables()
-        viewModel.getDoctor(id: 4)
+        viewModel.getDoctor(id: doctorId!)
         bindViewModel()
     }
-
+    
+    init(doctorId: Int) {
+        self.doctorId = doctorId
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func setupTables() {
         educationTableView.delegate = self
         educationTableView.dataSource = self
@@ -307,7 +316,6 @@ extension DoctorViewController: UITableViewDataSource {
         }
         
         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            // Return a specific title for each table view.
             if tableView == educationTableView {
                 return "Education"
             } else if tableView == experienceTableView {

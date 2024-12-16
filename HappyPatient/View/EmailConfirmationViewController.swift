@@ -176,7 +176,7 @@ class EmailConfirmationViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] success in
                 guard success == true else { return }
-                let viewVC = DoctorViewController()
+                let viewVC = TabBarControllers()
                 viewVC.modalPresentationStyle = .fullScreen
                 self?.present(viewVC, animated: true)
             }
