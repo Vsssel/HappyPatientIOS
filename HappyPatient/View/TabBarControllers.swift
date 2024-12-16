@@ -12,7 +12,7 @@ class TabBarControllers: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let mainVC = DoctorViewController()
+        let mainVC = SearchViewController()
         let appointmentsVC = AppointmentsViewController()
         let recordsVC = RecordsViewController()
         let myProfileVC = MyProfileViewController()
