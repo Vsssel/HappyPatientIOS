@@ -11,6 +11,8 @@ import SnapKit
 
 class DoctorViewController: UIViewController, UITableViewDelegate {
     private let viewModel = DoctorViewModel()
+    private let loadingIndicator = UIActivityIndicatorView(style: .large)
+
     public var doctor: Doctor? {
         didSet {
             updateDoctorUI()
@@ -33,6 +35,7 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
     private let educationTableView = UITableView(frame: .zero, style: .plain)
     private let experienceTableView = UITableView(frame: .zero, style: .plain)
     private let priceListTableView = UITableView(frame: .zero, style: .plain)
+    private lazy var detailsContainer: UIView = createContainerView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +67,16 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
                 self?.doctor = success
             }
             .store(in: &cancellables)
-    }
+        
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                self?.loadingIndicator.isHidden = !isLoading
+                isLoading ? self?.loadingIndicator.startAnimating() : self?.loadingIndicator.stopAnimating()
+                self?.detailsContainer.isHidden = isLoading
+            }
+            .store(in: &cancellables)
+     }
     
     private func updateDoctorUI() {
         guard let doctor = doctor else { return }
@@ -104,8 +116,8 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
+        view.addSubview(loadingIndicator)
 
-        let detailsContainer = createContainerView()
         view.addSubview(detailsContainer)
 
         detailsContainer.addSubview(doctorImage)
@@ -152,7 +164,6 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
             make.leading.trailing.equalToSuperview().inset(1)
         }
 
-        // Assign fixed heights to the table views
         educationTableView.snp.makeConstraints { make in
             make.height.equalTo(100)
         }
@@ -168,6 +179,10 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
             make.top.equalTo(priceListTableView.snp.bottom).offset(26)
             make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalToSuperview().inset(16)
+        }
+        
+        loadingIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
         
         makeAppointmentButton.addTarget(self, action: #selector(makeAppointment), for: .touchUpInside)

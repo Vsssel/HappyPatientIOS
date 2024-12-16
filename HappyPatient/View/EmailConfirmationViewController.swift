@@ -66,7 +66,6 @@ class EmailConfirmationViewController: UIViewController {
     }
     
     private func setupButtons() {
-        // Complete Sign Up Button
         completeSignUpButton.setTitle("Complete Sign Up", for: .normal)
         completeSignUpButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         completeSignUpButton.backgroundColor = .systemBlue
@@ -74,7 +73,6 @@ class EmailConfirmationViewController: UIViewController {
         completeSignUpButton.layer.cornerRadius = 8
         completeSignUpButton.addTarget(self, action: #selector(completeSignUpButtonTapped), for: .touchUpInside)
         
-        // Back Button
         backButton.setTitle("Back", for: .normal)
         backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         backButton.backgroundColor = .systemBlue
@@ -104,7 +102,6 @@ class EmailConfirmationViewController: UIViewController {
     }
     
     private func setupContentView() {
-        // Configure content view
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 10
         contentView.layer.shadowColor = UIColor.black.cgColor
@@ -112,11 +109,9 @@ class EmailConfirmationViewController: UIViewController {
         contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
         contentView.layer.shadowRadius = 6
         
-        // Add stack view to content view
         contentView.addSubview(mainStack)
         view.addSubview(contentView)
         
-        // Layout with SnapKit
         contentView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.left.right.equalToSuperview().inset(20)
@@ -130,7 +125,6 @@ class EmailConfirmationViewController: UIViewController {
     @objc private func completeSignUpButtonTapped() {
         guard let user = user else { return }
 
-        // Validate fields
         guard !dateFormatter.string(from: birthDatePicker.date).isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
               let passwordConfirmation = confirmPasswordTextField.text, !passwordConfirmation.isEmpty,

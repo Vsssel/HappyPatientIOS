@@ -30,6 +30,7 @@ class LoginViewModel: ObservableObject {
                                       auth: false,
                                       responseType: User.self)
             .sink(receiveCompletion: { [weak self] completion in
+                print(completion)
                 self?.isLoading = false
                 if case .failure(let error) = completion {
                     self?.errorMessage = error.localizedDescription

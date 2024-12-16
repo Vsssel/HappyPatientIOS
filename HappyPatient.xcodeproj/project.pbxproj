@@ -26,6 +26,7 @@
 		B861A90C2CF8B1C1005FBABC /* HappyPatient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B861A90A2CF8B1C1005FBABC /* HappyPatient.xcdatamodeld */; };
 		B861A90E2CF8B1C2005FBABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B861A90D2CF8B1C2005FBABC /* Assets.xcassets */; };
 		B861A9112CF8B1C2005FBABC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B861A9102CF8B1C2005FBABC /* Base */; };
+		B87196422D0F60E6009512F7 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87196412D0F60E6009512F7 /* ErrorResponse.swift */; };
 		B88498D92CFDD997005B2BE2 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88498D82CFDD997005B2BE2 /* AuthenticationManager.swift */; };
 		B88498DB2CFDDFAE005B2BE2 /* DoctorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88498DA2CFDDFAE005B2BE2 /* DoctorViewModel.swift */; };
 		B88498DD2CFDDFBF005B2BE2 /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88498DC2CFDDFBF005B2BE2 /* Doctor.swift */; };
@@ -73,6 +74,7 @@
 		B861A90D2CF8B1C2005FBABC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B861A9102CF8B1C2005FBABC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B861A9122CF8B1C2005FBABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B87196412D0F60E6009512F7 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		B88498D82CFDD997005B2BE2 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		B88498DA2CFDDFAE005B2BE2 /* DoctorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewModel.swift; sourceTree = "<group>"; };
 		B88498DC2CFDDFBF005B2BE2 /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				B8E005862D0E0DB80049EDED /* Appointments.swift */,
 				B8E005902D0EF65C0049EDED /* AppointmentDetail.swift */,
 				B8E005942D0F12710049EDED /* Records.swift */,
+				B87196412D0F60E6009512F7 /* ErrorResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				B8E005852D0E0D4E0049EDED /* AppointmentsViewModel.swift in Sources */,
 				B8E0058F2D0EEBA60049EDED /* EditAppointmentViewModel.swift in Sources */,
 				B88498DB2CFDDFAE005B2BE2 /* DoctorViewModel.swift in Sources */,
+				B87196422D0F60E6009512F7 /* ErrorResponse.swift in Sources */,
 				B8E005792D0DD8870049EDED /* ViewController.swift in Sources */,
 				B82F5FC32CF9CB730020EEC6 /* NetworkManager.swift in Sources */,
 				B8E0057D2D0DD95D0049EDED /* RecordsViewController.swift in Sources */,

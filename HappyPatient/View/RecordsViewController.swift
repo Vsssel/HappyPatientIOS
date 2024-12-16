@@ -5,11 +5,12 @@ import SnapKit
 
 class RecordsViewController: UIViewController {
     
-    private var records: [Page] = [] // Initialize to avoid nil checks
+    private var records: [Page] = []
     private var viewModel = RecordsViewModel()
     private var cancellables: Set<AnyCancellable> = []
     private var selectedOption = "test"
     private let items = ["test", "anamnesis", "conclusion"]
+    private let loadingIndicator = UIActivityIndicatorView(style: .large)
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -61,6 +62,7 @@ class RecordsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
+        view.addSubview(loadingIndicator)
         
         segmentedControl.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
@@ -72,6 +74,10 @@ class RecordsViewController: UIViewController {
             make.top.equalTo(segmentedControl.snp.bottom).offset(10)
             make.leading.trailing.bottom.equalToSuperview()
         }
+        
+        loadingIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     private func setupBindings() {
@@ -79,7 +85,7 @@ class RecordsViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] records in
                 guard let self = self else { return }
-                self.records = records?.page ?? [] // Safely unwrap `records`
+                self.records = records?.page ?? []
                 self.tableView.reloadData()
             }
             .store(in: &cancellables)
@@ -89,6 +95,16 @@ class RecordsViewController: UIViewController {
             .sink { [weak self] errorMessage in
                 guard let errorMessage = errorMessage else { return }
                 self?.showErrorAlert(message: errorMessage)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                guard let self = self else { return }
+                self.loadingIndicator.isHidden = !isLoading
+                isLoading ? self.loadingIndicator.startAnimating() : self.loadingIndicator.stopAnimating()
+                self.tableView.isHidden = isLoading
             }
             .store(in: &cancellables)
     }
@@ -103,8 +119,6 @@ class RecordsViewController: UIViewController {
         present(alert, animated: true)
     }
 }
-
-// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -66,7 +66,6 @@ class MyProfileViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
 
-        // Email Label
         emailLabel.font = .systemFont(ofSize: 16)
         emailLabel.textAlignment = .center
         emailLabel.textColor = .secondaryLabel
@@ -76,7 +75,6 @@ class MyProfileViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
 
-        // Logout Button
         logoutButton.setTitle("Logout", for: .normal)
         logoutButton.setTitleColor(.white, for: .normal)
         logoutButton.backgroundColor = .systemBlue
@@ -90,7 +88,6 @@ class MyProfileViewController: UIViewController {
             make.height.equalTo(44)
         }
 
-        // Loading Indicator
         view.addSubview(loadingIndicator)
         loadingIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -98,7 +95,6 @@ class MyProfileViewController: UIViewController {
     }
 
     private func setupBindings() {
-        // Bind user data
         viewModel.$user
             .receive(on: DispatchQueue.main)
             .sink { [weak self] user in
@@ -106,7 +102,6 @@ class MyProfileViewController: UIViewController {
             }
             .store(in: &cancellables)
 
-        // Bind loading state
         viewModel.$isLoading
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isLoading in
@@ -115,7 +110,6 @@ class MyProfileViewController: UIViewController {
             }
             .store(in: &cancellables)
 
-        // Bind error message
         viewModel.$errorMessage
             .receive(on: DispatchQueue.main)
             .sink { [weak self] errorMessage in

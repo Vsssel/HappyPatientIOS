@@ -8,6 +8,7 @@ class AppointmentsViewController: UIViewController {
     private var filteredAppointments: [Appointment] = []
     private var viewModel = AppointmentsViewModel()
     private var cancellables: Set<AnyCancellable> = []
+    private let loadingIndicator = UIActivityIndicatorView(style: .large)
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -54,6 +55,7 @@ class AppointmentsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(tableView)
+        view.addSubview(loadingIndicator)
         
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.snp.makeConstraints { make in
@@ -64,10 +66,14 @@ class AppointmentsViewController: UIViewController {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(10)
-           make.leading.equalTo(view.snp.leading)
-           make.trailing.equalTo(view.snp.trailing)
-           make.bottom.equalTo(view.snp.bottom)
-       }
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.bottom.equalTo(view.snp.bottom)
+        }
+        
+        loadingIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     private func setupBindings() {
@@ -85,6 +91,16 @@ class AppointmentsViewController: UIViewController {
             .sink { [weak self] errorMessage in
                 guard let errorMessage = errorMessage else { return }
                 self?.showErrorAlert(message: errorMessage)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                guard let self = self else { return }
+                self.loadingIndicator.isHidden = !isLoading
+                isLoading ? self.loadingIndicator.startAnimating() : self.loadingIndicator.stopAnimating()
+                self.tableView.isHidden = isLoading
             }
             .store(in: &cancellables)
     }
@@ -169,8 +185,6 @@ class AppointmentsViewController: UIViewController {
     }
 
 }
-
-// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension AppointmentsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
