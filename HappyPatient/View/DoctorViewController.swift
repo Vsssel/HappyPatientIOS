@@ -35,7 +35,7 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
     private let educationTableView = UITableView(frame: .zero, style: .plain)
     private let experienceTableView = UITableView(frame: .zero, style: .plain)
     private let priceListTableView = UITableView(frame: .zero, style: .plain)
-    private lazy var detailsContainer: UIView = createContainerView()
+    private lazy var detailsContainer: UIScrollView = createContainerView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,12 +126,13 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
     private func setupUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(loadingIndicator)
-
         view.addSubview(detailsContainer)
 
-        detailsContainer.addSubview(doctorImage)
-        detailsContainer.addSubview(nameLabel)
+        let contentView = UIView()
+        detailsContainer.addSubview(contentView)
 
+        contentView.addSubview(doctorImage)
+        contentView.addSubview(nameLabel)
         let categoryView = createIconWithLabel(iconName: "person.text.rectangle", label: categoryLabel)
         let experienceView = createIconWithLabel(iconName: "clock", label: experienceLabel)
         let priceView = createIconWithLabel(iconName: "dollarsign.circle", label: priceLabel)
@@ -139,13 +140,21 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
         let addressView = createIconWithLabel(iconName: "map", label: addressLabel)
         let officeView = createIconWithLabel(iconName: "building.2", label: officeLabel)
         let secondRowStack = createHorizontalStack(views: [addressView, officeView], spacing: 16)
-
         let verticalStack = createVerticalStack(views: [firstRowStack, secondRowStack], spacing: 16)
-        detailsContainer.addSubview(verticalStack)
+        contentView.addSubview(verticalStack)
+
+        let tableStack = createVerticalStack(views: [educationTableView, experienceTableView, priceListTableView], spacing: 16)
+        contentView.addSubview(tableStack)
+        contentView.addSubview(makeAppointmentButton)
 
         detailsContainer.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalTo(detailsContainer.snp.width)
         }
 
         doctorImage.snp.makeConstraints { make in
@@ -159,18 +168,14 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
             make.centerX.equalToSuperview()
         }
 
-
         verticalStack.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
         }
 
-        let tableStack = createVerticalStack(views: [educationTableView, experienceTableView, priceListTableView], spacing: 16)
-        detailsContainer.addSubview(tableStack)
-
         tableStack.snp.makeConstraints { make in
             make.top.equalTo(verticalStack.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(1)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
 
         educationTableView.snp.makeConstraints { make in
@@ -182,21 +187,20 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
         priceListTableView.snp.makeConstraints { make in
             make.height.equalTo(100)
         }
-        
-        detailsContainer.addSubview(makeAppointmentButton)
+
         makeAppointmentButton.snp.makeConstraints { make in
-            make.top.equalTo(priceListTableView.snp.bottom).offset(26)
+            make.top.equalTo(tableStack.snp.bottom).offset(26)
             make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalToSuperview().inset(16)
         }
-        
+
         loadingIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
-        makeAppointmentButton.addTarget(self, action: #selector(makeAppointment), for: .touchUpInside)
 
+        makeAppointmentButton.addTarget(self, action: #selector(makeAppointment), for: .touchUpInside)
     }
+
 
     private func createIconWithLabel(iconName: String, label: UILabel) -> UIView {
         let iconImageView = UIImageView(image: UIImage(systemName: iconName))
@@ -228,8 +232,10 @@ class DoctorViewController: UIViewController, UITableViewDelegate {
         return button
     }
 
-    private func createContainerView() -> UIView {
-        let view = UIView()
+    private func createContainerView() -> UIScrollView {
+        let view = UIScrollView()
+        view.showsVerticalScrollIndicator = true
+        view.showsHorizontalScrollIndicator = false
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 10
         view.layer.shadowColor = UIColor.black.cgColor

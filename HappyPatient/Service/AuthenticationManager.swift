@@ -29,7 +29,7 @@ class AuthenticationManager {
         
         print("Save Token: \(query)")
 
-        SecItemDelete(query as CFDictionary) // Delete existing token if any
+        SecItemDelete(query as CFDictionary)
         SecItemAdd(query as CFDictionary, nil)
     }
 
